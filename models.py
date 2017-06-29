@@ -1,4 +1,4 @@
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.sqlalchemy import SQLAlchemy, Pagination
 from werkzeug import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
@@ -12,10 +12,10 @@ class User(db.Model):
   pwdhash = db.Column(db.String(54))
 
   def __init__(self, firstname, lastname, email, password):
-    self.firstname = firstname.title()
-    self.lastname = lastname.title()
-    self.email = email.lower()
-    self.set_password(password)
+    self.firstname = firstname.title() #makes capital
+    self.lastname = lastname.title() 
+    self.email = email.lower() #always lower case
+    self.set_password(password) #see set_password method
      
   def set_password(self, password):
     self.pwdhash = generate_password_hash(password)
